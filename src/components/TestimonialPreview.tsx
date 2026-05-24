@@ -13,14 +13,14 @@ const TestimonialPreview: React.FC = () => {
       name: 'Prashant Kumar',
       role: 'Product Manager',
       company: 'Tech Startup',
-      testimonial: 'Nishant delivered exceptional work on our platform. His attention to detail and technical expertise made all the difference.',
+      testimonial: 'Souvik delivered exceptional work on our platform. His attention to detail and technical expertise made all the difference.',
       initial: 'P',
     },
     {
       name: 'Gaurav Shaw',
       role: 'Senior Developer',
       company: 'Software Solutions',
-      testimonial: 'Working with Nishant was a pleasure. He brings innovative solutions and maintains high code quality throughout.',
+      testimonial: 'Working with Souvik was a pleasure. He brings innovative solutions and maintains high code quality throughout.',
       initial: 'G',
     },
   ];

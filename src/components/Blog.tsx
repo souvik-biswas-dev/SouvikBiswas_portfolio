@@ -14,7 +14,7 @@ const Blog: React.FC = () => {
       readTime: '8 min read',
       title: 'Optimizing Spring Boot Applications',
       excerpt: 'Learn advanced techniques to boost your Spring Boot application performance.',
-      link: 'https://medium.com/@me.knishant',
+      link: 'https://medium.com/@souvik-biswas-dev',
     },
     {
       number: '02',
@@ -22,7 +22,7 @@ const Blog: React.FC = () => {
       readTime: '6 min read',
       title: 'Building Secure React Applications',
       excerpt: 'Best practices for implementing security in modern React applications.',
-      link: 'https://medium.com/@me.knishant',
+      link: 'https://medium.com/@souvik-biswas-dev',
     },
     {
       number: '03',
@@ -30,7 +30,7 @@ const Blog: React.FC = () => {
       readTime: '10 min read',
       title: 'Docker for Full-Stack Developers',
       excerpt: 'Complete guide to containerizing your full-stack applications with Docker.',
-      link: 'https://medium.com/@me.knishant',
+      link: 'https://medium.com/@souvik-biswas-dev',
     },
   ];
 
@@ -107,7 +107,7 @@ const Blog: React.FC = () => {
 
         <div className="text-center mt-12">
           <a
-            href="https://medium.com/@me.knishant"
+            href="https://medium.com/@souvik-biswas-dev"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-300"

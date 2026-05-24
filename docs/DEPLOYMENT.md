@@ -76,10 +76,10 @@ This guide covers deploying the portfolio website to various hosting platforms w
 
 Create `.env.production`:
 ```env
-VITE_APP_TITLE=Kumar Nishant - Full Stack Developer
+VITE_APP_TITLE=Souvik Biswas - Full Stack Developer
 VITE_APP_DESCRIPTION=Full-Stack Developer specializing in Java Spring Boot and React.js
 VITE_APP_URL=https://your-domain.com
-VITE_CONTACT_EMAIL=me.knishant@gmail.com
+VITE_CONTACT_EMAIL=souvikbiswas.dev@gmail.com
 ```
 
 ### Vite Configuration
@@ -182,23 +182,23 @@ Update `index.html`:
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <!-- Primary Meta Tags -->
-  <title>Kumar Nishant - Full Stack Developer</title>
-  <meta name="title" content="Kumar Nishant - Full Stack Developer">
+  <title>Souvik Biswas - Full Stack Developer</title>
+  <meta name="title" content="Souvik Biswas - Full Stack Developer">
   <meta name="description" content="Full-Stack Developer specializing in Java Spring Boot and React.js. Building scalable, secure web applications.">
   <meta name="keywords" content="Full Stack Developer, Java, Spring Boot, React, Web Development">
-  <meta name="author" content="Kumar Nishant">
+  <meta name="author" content="Souvik Biswas">
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://your-domain.com/">
-  <meta property="og:title" content="Kumar Nishant - Full Stack Developer">
+  <meta property="og:title" content="Souvik Biswas - Full Stack Developer">
   <meta property="og:description" content="Full-Stack Developer specializing in Java Spring Boot and React.js">
   <meta property="og:image" content="https://your-domain.com/og-image.jpg">
   
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://your-domain.com/">
-  <meta property="twitter:title" content="Kumar Nishant - Full Stack Developer">
+  <meta property="twitter:title" content="Souvik Biswas - Full Stack Developer">
   <meta property="twitter:description" content="Full-Stack Developer specializing in Java Spring Boot and React.js">
   <meta property="twitter:image" content="https://your-domain.com/og-image.jpg">
   
@@ -399,7 +399,7 @@ jobs:
 Create `public/manifest.json`:
 ```json
 {
-  "name": "Kumar Nishant - Portfolio",
+  "name": "Souvik Biswas - Portfolio",
   "short_name": "KN Portfolio",
   "description": "Full-Stack Developer Portfolio",
   "start_url": "/",

@@ -30,7 +30,7 @@ const BlogSection: React.FC = () => {
   useEffect(() => {
     const fetchMedium = async () => {
       try {
-        const res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@me.knishant');
+        const res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@souvik-biswas-dev');
         const data = await res.json();
         if (data.status === 'ok') {
           setPosts(data.items.slice(0, 3));
@@ -149,7 +149,7 @@ const BlogSection: React.FC = () => {
         </div>
 
         <div className="mt-16 text-center">
-          <a href="https://medium.com/@me.knishant" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-mono uppercase tracking-widest hover:text-red-500 transition-colors group">
+          <a href="https://medium.com/@souvik-biswas-dev" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-mono uppercase tracking-widest hover:text-red-500 transition-colors group">
             View All on Medium <FiArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
           </a>
         </div>

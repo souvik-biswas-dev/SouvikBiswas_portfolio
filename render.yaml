@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: nishant-portfolio-api
+    name: souvik-portfolio-api
     env: node
     plan: free
     buildCommand: cd api && npm install && npm run build

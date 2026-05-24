@@ -204,8 +204,8 @@ app.get('/api/profile-views', async (req: Request, res: Response) => {
 
 app.get('/api/commit-stats', async (req: Request, res: Response) => {
   try {
-    // We use the same username "K-Nishant-18" as seen in the frontend code for this card
-    // The previous URL was: https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=K-Nishant-18
+    
+    
     const response = await fetch(`https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=souvik-biswas-dev&t=${new Date().getTime()}`);
 
     if (!response.ok) {
