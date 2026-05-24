@@ -1,0 +1,32 @@
+import React from 'react';
+import Hero from '../components/Hero';
+import About from '../components/About';
+import Skills from '../components/Skills';
+import Contact from '../components/Contact';
+import Footer from '../components/Footer';
+import Projects from '../components/Projects';
+import Timeline from '../components/Timeline';
+import DevActivity from '../components/DevActivity';
+
+
+
+interface HomeProps {
+  startAnimation?: boolean;
+}
+
+const Home: React.FC<HomeProps> = ({ startAnimation = false }) => {
+  return (
+    <div className="relative overflow-x-hidden">
+      <Hero startAnimation={startAnimation} />
+      <About />
+      <Skills />
+      <Projects />
+      <DevActivity />
+      <Timeline />
+      <Contact />
+      <Footer />
+    </div>
+  );
+};
+
+export default Home;
