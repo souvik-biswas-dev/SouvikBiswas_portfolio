@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FiArrowUpRight, FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
 
 const Footer: React.FC = () => {
   const [time, setTime] = useState<string>("");
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const updateTime = () => {
@@ -16,10 +18,21 @@ const Footer: React.FC = () => {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    // These sections only exist on the Home page. From any other route,
+    // navigate home first and let Home scroll to the section once it mounts.
+    if (location.pathname !== '/') {
+      navigate('/', { state: { scrollTo: sectionId } });
+      return;
     }
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const goHome = () => {
+    if (location.pathname !== '/') {
+      navigate('/', { state: { scrollTo: 'top' } });
+      return;
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const scrollToTop = () => {
@@ -33,7 +46,7 @@ const Footer: React.FC = () => {
   ];
 
   const navLinks = [
-    { name: "HOME", action: () => scrollToTop() },
+    { name: "HOME", action: () => goHome() },
     { name: "ABOUT", action: () => scrollToSection('about') },
     { name: "WORK", action: () => scrollToSection('projects') },
     { name: "CONTACT", action: () => scrollToSection('contact') }, // Assuming contact section exists or just footer
