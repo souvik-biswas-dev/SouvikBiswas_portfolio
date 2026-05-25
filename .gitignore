@@ -2,6 +2,9 @@
 node_modules/
 api/node_modules/
 
+# Private deployment notes (contains VPS specifics)
+/DEPLOYMENT.md
+
 # Build outputs
 dist/
 dist-ssr/
