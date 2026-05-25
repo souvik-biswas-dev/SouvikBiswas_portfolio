@@ -15,7 +15,7 @@ const projects = [
   },
   {
     id: '02',
-    title: 'BACKEND LEDGER',
+    title: 'FINVAULT',
     category: 'Financial\nSystem',
     description: 'A double-entry bookkeeping ledger with append-only, immutable entries and a tamper-evident audit trail, hardened with JWT and rate-limiting.',
     tech: ['Node.js', 'Express', 'MongoDB'],
@@ -24,7 +24,7 @@ const projects = [
   },
   {
     id: '03',
-    title: 'INTERVIEW\nAI',
+    title: 'PREPSENSE-AI',
     category: 'AI\nPlatform',
     description: 'An AI interview-prep platform that parses a resume against a job description to generate a tailored prep strategy and ATS-optimized resumes.',
     tech: ['React 19', 'Gemini', 'Puppeteer'],
@@ -159,7 +159,7 @@ const Projects: React.FC = () => {
           <div className="col-span-12 md:col-span-10 md:col-start-3 relative z-20">
             <Link to={projects[2].link} className="block">
               <h3 className="text-[18vw] md:text-[14vw] font-black uppercase tracking-tighter leading-[0.8] transition-all duration-300 text-black dark:text-white hover:italic hover:text-transparent hover:[-webkit-text-stroke:1px_black] dark:hover:[-webkit-text-stroke:1px_white]">
-                INTERVIEW<br />AI
+                {projects[2].title}
               </h3>
             </Link>
             <div className="mt-8 max-w-md text-black dark:text-white">
