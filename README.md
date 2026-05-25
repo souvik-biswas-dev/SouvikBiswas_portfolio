@@ -108,21 +108,6 @@ Souvik_Portfolio/
 
 ---
 
-## Deployment
-
-### Frontend (Vercel)
-1. Push to GitHub and connect repo to Vercel
-2. Set build command: `npm run build`, output dir: `dist`
-3. Add `VITE_` prefixed env vars in the Vercel dashboard
-
-### Backend (Render)
-1. Connect the `api/` folder as a separate Render web service
-2. Set build command: `npm install && npm run build`
-3. Set start command: `npm start`
-4. Add `DATABASE_URL`, `EMAIL_USER`, `EMAIL_PASS` env vars
-
----
-
 ## License
 
 MIT License — feel free to use this as a reference or starting point.
