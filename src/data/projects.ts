@@ -16,7 +16,7 @@ export interface Project {
     tech: string[];
     status: string;
     image: string;
-    github: string;
+    github: string | null;
     live: string | null;
     impact?: string[];
     challenges?: { title: string; description: string; solution: string }[];
@@ -24,8 +24,6 @@ export interface Project {
     color: string;
     architecture?: ProjectArchitecture;
 }
-
-const GITHUB = 'https://github.com/souvik-biswas-dev';
 
 export const projects: Project[] = [
     {
@@ -36,8 +34,8 @@ export const projects: Project[] = [
         longDescription: 'School Portal is a multi-tenant school ERP I architected and shipped solo for a startup — now serving 1,000+ active students. Tenant isolation is enforced at the ORM layer via AsyncLocalStorage and a custom Mongoose plugin, paired with an AI attendance pipeline and Dockerized, idempotent billing.',
         tech: ['Next.js', 'React', 'MongoDB', 'Redis', 'Docker', 'Gemini'],
         status: 'Live',
-        image: '/collegiaMockup.png',
-        github: GITHUB,
+        image: '/school-portal.png',
+        github: null,
         live: 'https://schoolportal360.com',
         impact: ['1,000+ Active Students', 'Strict Tenant Isolation', 'AI Attendance OCR'],
         challenges: [
@@ -217,14 +215,14 @@ export const projects: Project[] = [
     },
     {
         id: '02',
-        title: 'Backend Ledger',
+        title: 'FinVault',
         category: 'Financial System',
         description: 'A double-entry bookkeeping ledger with append-only, immutable entries and a tamper-evident audit trail.',
-        longDescription: 'Backend Ledger is a double-entry bookkeeping system with append-only, immutable transaction entries that guarantee a tamper-evident audit trail. Transfers use idempotency keys to prevent duplicates, balances are computed rather than stored to eliminate drift, and the REST API is hardened end-to-end.',
+        longDescription: 'FinVault is a double-entry bookkeeping system with append-only, immutable transaction entries that guarantee a tamper-evident audit trail. Transfers use idempotency keys to prevent duplicates, balances are computed rather than stored to eliminate drift, and the REST API is hardened end-to-end.',
         tech: ['Node.js', 'Express 5', 'MongoDB', 'SvelteKit', 'TypeScript', 'Docker'],
         status: 'Live',
-        image: '/skillbloom.png',
-        github: GITHUB,
+        image: '/fin-vault.png',
+        github: 'https://github.com/souvik-biswas-dev/FinVault',
         live: null,
         impact: ['Immutable Audit Trail', 'Idempotent Transfers', 'Hardened REST API'],
         challenges: [
@@ -360,14 +358,14 @@ export const projects: Project[] = [
     },
     {
         id: '03',
-        title: 'InterviewAI',
+        title: 'PrepSense-AI',
         category: 'AI Platform',
         description: 'An AI platform that parses a resume against a job description to generate a personalized interview-prep strategy.',
-        longDescription: 'InterviewAI parses a user’s PDF resume against a target job description to generate a personalized interview-prep strategy. It uses the Gemini SDK with Zod-validated JSON to produce technical and behavioral questions plus a color-coded skill-gap analysis, and a Puppeteer pipeline that renders ATS-optimized resumes.',
+        longDescription: 'PrepSense-AI parses a user’s PDF resume against a target job description to generate a personalized interview-prep strategy. It uses the Gemini SDK with Zod-validated JSON to produce technical and behavioral questions plus a color-coded skill-gap analysis, and a Puppeteer pipeline that renders ATS-optimized resumes.',
         tech: ['React 19', 'Express 5', 'Gemini Flash', 'MongoDB', 'Puppeteer', 'Zod'],
         status: 'Live',
-        image: '/0xkidMockup.png',
-        github: GITHUB,
+        image: '/prepsenseAI.png',
+        github: 'https://github.com/souvik-biswas-dev/PrepSense-AI',
         live: null,
         impact: ['Resume vs JD Analysis', 'Skill-Gap Report', 'ATS PDF Generation'],
         challenges: [
@@ -508,8 +506,8 @@ export const projects: Project[] = [
         longDescription: 'StreamSense is an AI-enhanced movie streaming platform backed by a highly concurrent Go (Gin) REST API and MongoDB. It uses stateless JWT access/refresh rotation in secure HttpOnly cookies, and a LangChainGo + OpenAI sentiment pipeline that maps admin reviews to ranking scores for genre-based recommendations.',
         tech: ['React (Vite)', 'Go (Gin)', 'MongoDB', 'LangChainGo', 'OpenAI'],
         status: 'Completed',
-        image: '/cultural.png',
-        github: GITHUB,
+        image: '/steamsense.png',
+        github: 'https://github.com/souvik-biswas-dev/StreamSense',
         live: null,
         impact: ['Concurrent Go API', 'JWT Token Rotation', 'AI Sentiment Ranking'],
         challenges: [
