@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { FiStar, FiCode, FiGitPullRequest, FiAlertCircle, FiArrowUpRight, FiEye, FiCornerDownRight } from 'react-icons/fi';
+import { FiStar, FiCode, FiGitPullRequest, FiAlertCircle, FiArrowUpRight, FiGitBranch, FiCornerDownRight } from 'react-icons/fi';
 import ScrollRevealText from './ScrollRevealText';
 import MetricCard from './MetricCard';
 import RepoCard from './RepoCard';
@@ -29,10 +29,17 @@ interface GitHubData {
   }>;
   stats: {
     totalStars: number;
-    totalCommits: number;
+    totalForks: number;
     totalContributions: number;
-    profileViews: number; // Added for Profile Views
   };
+}
+
+interface GitHubRepo {
+  fork: boolean;
+  stargazers_count: number;
+  forks_count: number;
+  language: string;
+  size: number;
 }
 
 interface LanguageStat {
@@ -268,7 +275,7 @@ const DevActivity: React.FC = () => {
         let totalForks = 0;
 
         if (Array.isArray(reposData)) {
-          reposData.forEach((repo: any) => {
+          reposData.forEach((repo: GitHubRepo) => {
             if (repo.fork) return;
             totalStars += repo.stargazers_count;
             totalForks += repo.forks_count;
@@ -290,16 +297,11 @@ const DevActivity: React.FC = () => {
           setLanguagePercentages(top3);
         } else {
           // If SVG parsing failed, fall back to repo-based calculation
-          let totalStars = 0;
-          let totalForks = 0;
           const langCounts: Record<string, number> = {};
 
           if (Array.isArray(reposData)) {
-            reposData.forEach((repo: any) => {
+            reposData.forEach((repo: GitHubRepo) => {
               if (repo.fork) return;
-
-              totalStars += repo.stargazers_count;
-              totalForks += repo.forks_count;
               if (repo.language) {
                 const weight = repo.size || 1;
                 langCounts[repo.language] = (langCounts[repo.language] || 0) + weight;
@@ -331,7 +333,6 @@ const DevActivity: React.FC = () => {
 
         // --- Calculate Contributions (Recent & Total) ---
         let totalContributions = 0;
-        let profileViews = 0;
 
         // Fetch Total Contributions from 3rd party or estimate
         try {
@@ -341,44 +342,13 @@ const DevActivity: React.FC = () => {
             const contribData = await contribRes.json();
 
             // Sum all years for All Time Contributions
-            totalContributions = Object.values(contribData.total || {}).reduce((a: any, b: any) => a + b, 0) as number;
+            totalContributions = (Object.values(contribData.total || {}) as number[]).reduce((a, b) => a + b, 0);
           }
         } catch (e) {
           console.warn("Contrib API failed", e);
         }
 
-        // Fetch Profile Views from Backend (Proxy)
-        // Fetch Profile Views from Backend (Proxy)
-        try {
-          // Use our backend proxy which handles CORS and text parsing
-          // In PROD: Use relative '/api' so Vercel rewrites handle it (defined in vercel.json)
-          // In DEV: Use localhost or env var
-          const apiUrl = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:5000/api');
-
-          // Remove duplicate /api if present (just in case)
-          const cleanApiUrl = apiUrl.endsWith('/api') ? apiUrl.slice(0, -4) : apiUrl;
-
-          // Construct the final URL. 
-          // If we want to hit /api/profile-views:
-          // Local: http://localhost:5000/api/profile-views
-          // Prod (via Vercel): /api/profile-views is rewritten to your deployed API
-          const fetchUrl = `${cleanApiUrl}/api/profile-views`;
-
-          console.log("Fetching Profile Views from:", fetchUrl);
-
-          const viewsRes = await fetch(fetchUrl);
-
-          if (viewsRes.ok) {
-            const viewsData = await viewsRes.json();
-            if (typeof viewsData.views === 'number') {
-              profileViews = viewsData.views;
-            }
-          } else {
-            console.error(`Profile Views fetch failed: ${viewsRes.status} ${viewsRes.statusText}`);
-          }
-        } catch (e) {
-          console.warn("Profile Views fetch failed", e);
-        }
+        // (Profile-views metric removed — komarev returns 0 for this profile.)
 
         // If external API failed, use recent events * multiplier or just show recent
         if (totalContributions === 0) totalContributions = (userData.public_repos * 5); // Fallback estimate
@@ -388,14 +358,13 @@ const DevActivity: React.FC = () => {
           repos: Array.isArray(reposData) ? reposData : [],
           stats: {
             totalStars,
-            totalCommits: totalForks, // REPURPOSED field to hold Forks count
+            totalForks,
             totalContributions,
-            profileViews
           }
         });
-      } catch (err: any) {
+      } catch (err) {
         console.error('Error fetching GitHub data:', err);
-        setError(err.message || "Failed to load GitHub data");
+        setError(err instanceof Error ? err.message : "Failed to load GitHub data");
       } finally {
         setLoading(false);
       }
@@ -501,10 +470,10 @@ const DevActivity: React.FC = () => {
               description="Total commits, issues, and PRs all years."
             />
             <MetricCard
-              icon={<FiEye />}
-              title="Profile Views"
-              value={data.stats.profileViews}
-              description="Total views on your GitHub profile."
+              icon={<FiGitBranch />}
+              title="Total Forks"
+              value={data.stats.totalForks}
+              description="Times your repositories have been forked."
             />
           </div>
         </div>

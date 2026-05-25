@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { FiArrowUpRight, FiArrowRight, FiCheck } from 'react-icons/fi';
+import { FiArrowRight, FiCheck } from 'react-icons/fi';
 import ScrollRevealText from './ScrollRevealText'; // Import the new component
 
 const Contact: React.FC = () => {
@@ -59,13 +58,35 @@ const Contact: React.FC = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Inquiry: ${formData.subject}`);
-    const body = encodeURIComponent(`Hi Souvik,\n\nMy name is ${formData.name}.\n\n${formData.message}\n\nBest,\n${formData.name} (${formData.email})`);
-    window.location.href = `mailto:souvikbiswas.dev@gmail.com?subject=${subject}&body=${body}`;
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:5000/api');
+      const baseUrl = apiUrl.endsWith('/api') ? apiUrl.slice(0, -4) : apiUrl;
+
+      const res = await fetch(`${baseUrl}/api/collaborate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          projectType: formData.subject,
+          description: formData.message,
+        }),
+      });
+
+      if (!res.ok) throw new Error(`Request failed: ${res.status}`);
+
+      setSubmitted(true);
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      setTimeout(() => setSubmitted(false), 3000);
+    } catch (err) {
+      // Backend failed — fall back to the user's mail client so nothing is lost.
+      console.error('Collaborate submit failed, falling back to mailto:', err);
+      const subject = encodeURIComponent(`Inquiry: ${formData.subject}`);
+      const body = encodeURIComponent(`Hi Souvik,\n\nMy name is ${formData.name}.\n\n${formData.message}\n\nBest,\n${formData.name} (${formData.email})`);
+      window.location.href = `mailto:souvikbiswas.dev@gmail.com?subject=${subject}&body=${body}`;
+    }
   };
 
   return (
