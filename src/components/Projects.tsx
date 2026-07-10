@@ -10,26 +10,43 @@ const projects = [
     category: 'Multi-Tenant\nERP',
     description: 'A multi-tenant school ERP serving 1,000+ students, with tenant isolation enforced at the ORM layer and an AI-powered attendance pipeline.',
     tech: ['Next.js', 'MongoDB', 'Redis'],
-    link: '/projects/01',
-    color: '#FF4D00',
+    link: '/projects/03',
+    live: 'https://schoolportal360.com',
+    code: null,
+    accent: '#FF4D00',
   },
   {
     id: '02',
-    title: 'FINVAULT',
-    category: 'Financial\nSystem',
-    description: 'A double-entry bookkeeping ledger with append-only, immutable entries and a tamper-evident audit trail, hardened with JWT and rate-limiting.',
-    tech: ['Node.js', 'Express', 'MongoDB'],
-    link: '/projects/02',
-    color: '#FF4D00',
-  },
-  {
-    id: '03',
     title: 'PREPSENSE-AI',
     category: 'AI\nPlatform',
     description: 'An AI interview-prep platform that parses a resume against a job description to generate a tailored prep strategy and ATS-optimized resumes.',
     tech: ['React 19', 'Gemini', 'Puppeteer'],
-    link: '/projects/03',
-    color: '#FF4D00',
+    link: '/projects/05',
+    live: 'https://prepsense-ai.pages.dev',
+    code: 'https://github.com/souvik-biswas-dev/PrepSense-AI',
+    accent: '#00A86B',
+  },
+  {
+    id: '03',
+    title: 'DRIFTWATCH',
+    category: 'DevOps\nWatchdog',
+    description: 'A watchdog that flags the moment live Docker containers stop matching the git-declared docker-compose.yml — drift caught within ~60 seconds.',
+    tech: ['Go (Gin)', 'SvelteKit', 'Postgres'],
+    link: '/projects/01',
+    live: 'https://driftwatch.pages.dev',
+    code: 'https://github.com/souvik-biswas-dev/DriftWatch',
+    accent: '#0057FF',
+  },
+  {
+    id: '04',
+    title: 'REVIEWFLOW',
+    category: 'Realtime\nPlatform',
+    description: 'Real-time, multiplayer code review with an AI in the room — live WebSocket rooms, GraphQL, and async Gemini reviews streaming in as they land.',
+    tech: ['Svelte 5', 'Go (Gin)', 'WebSocket'],
+    link: '/projects/02',
+    live: 'https://reviewflow.pages.dev',
+    code: 'https://github.com/souvik-biswas-dev/ReviewFlow',
+    accent: '#7C3AED',
   }
 ];
 
@@ -68,7 +85,6 @@ const Projects: React.FC = () => {
       <div className="max-w-[1920px] mx-auto relative z-10 w-full">
 
         {/* Header: Small, Technical */}
-        {/* Header: Small, Technical */}
         <div className="text-center mb-24 md:pb-12 pb-4">
           <motion.h2
             style={{
@@ -85,92 +101,70 @@ const Projects: React.FC = () => {
 
         </div>
 
-        {/* --- PROJECT 01: COLLEGIA (Left Heavy) --- */}
-        <div className="group relative mb-24 md:mb-8 grid grid-cols-1 md:grid-cols-12 gap-x-8 items-start">
-          {/* Meta (Absolute Left) */}
-          <div className="col-span-12 md:col-span-2 md:sticky md:top-32 self-start mb-8 md:mb-0">
-            <span className="text-sm font-mono block mb-2 text-red-600">01</span>
-            <h4 className="text-xl font-bold uppercase leading-tight whitespace-pre-wrap text-black dark:text-white">{projects[0].category}</h4>
-            <div className="h-px w-8 bg-black dark:bg-white my-4"></div>
-            <ul className="text-xs font-mono text-gray-600 dark:text-gray-400 space-y-1">
-              {projects[0].tech.map(t => <li key={t}>{t}</li>)}
-            </ul>
-          </div>
+        {projects.map((project, index) => {
+          const rightHeavy = index % 2 !== 0;
 
-          {/* Title (Massive, Spanning) */}
-          <div className="col-span-12 md:col-span-10 md:col-start-3 relative z-20">
-            <Link to={projects[0].link} className="block">
-              <h3 className="text-[18vw] md:text-[14vw] font-black uppercase tracking-tighter leading-[0.8] transition-all duration-300 text-black dark:text-white hover:italic hover:text-transparent hover:[-webkit-text-stroke:1px_black] dark:hover:[-webkit-text-stroke:1px_white]">
-                {projects[0].title}
-              </h3>
-            </Link>
-            <div className="mt-8 max-w-md text-black dark:text-white">
-              <p className="text-lg leading-snug">{projects[0].description}</p>
-              <div className="mt-6 flex gap-4">
-                <Link to={projects[0].link} className="flex items-center gap-2 text-xs font-bold uppercase border-b border-current pb-1 hover:text-[#FF4D00]">Live <FiArrowUpRight /></Link>
+          const meta = (
+            <div className={`col-span-12 md:col-span-2 md:sticky md:top-32 self-start mb-8 md:mb-0 ${rightHeavy ? 'order-1 md:order-3 text-right flex flex-col items-end' : ''}`}>
+              <span className="text-sm font-mono block mb-2 text-red-600">{project.id}</span>
+              <h4 className="text-xl font-bold uppercase leading-tight whitespace-pre-wrap text-black dark:text-white">{project.category}</h4>
+              <div className="h-px w-8 bg-black dark:bg-white my-4"></div>
+              <ul className="text-xs font-mono text-gray-600 dark:text-gray-400 space-y-1">
+                {project.tech.map(t => <li key={t}>{t}</li>)}
+              </ul>
+            </div>
+          );
+
+          const body = (
+            <div className={`col-span-12 md:col-span-10 relative z-20 ${rightHeavy ? 'md:col-start-1 order-2 md:order-2 text-right' : 'md:col-start-3'}`}>
+              <Link to={project.link} className="block">
+                <h3 className={`text-[18vw] md:text-[14vw] font-black uppercase tracking-tighter leading-[0.8] transition-all duration-300 text-black dark:text-white hover:italic hover:text-transparent hover:[-webkit-text-stroke:1px_black] dark:hover:[-webkit-text-stroke:1px_white] ${rightHeavy ? 'text-right' : ''}`}>
+                  {project.title}
+                </h3>
+              </Link>
+              <div className={`mt-8 max-w-md text-black dark:text-white ${rightHeavy ? 'ml-auto text-left' : ''}`}>
+                <p className="text-lg leading-snug">{project.description}</p>
+                <div className="mt-6 flex gap-6">
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-xs font-bold uppercase border-b border-current pb-1 transition-colors"
+                    style={{ ['--accent' as string]: project.accent }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = project.accent)}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = '')}
+                  >
+                    Live <FiArrowUpRight />
+                  </a>
+                  {project.code && (
+                    <a
+                      href={project.code}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-xs font-bold uppercase border-b border-current pb-1 transition-colors"
+                      onMouseEnter={(e) => (e.currentTarget.style.color = project.accent)}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = '')}
+                    >
+                      Code <FiArrowUpRight />
+                    </a>
+                  )}
+                  <Link to={project.link} className="flex items-center gap-2 text-xs font-bold uppercase border-b border-current pb-1 hover:text-red-600">
+                    Case Study <FiArrowUpRight />
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+          );
 
-
-        {/* --- PROJECT 02: 0XKID (Right Heavy) --- */}
-        <div className="group relative mb-24 md:mb-8 grid grid-cols-1 md:grid-cols-12 gap-x-8 items-start">
-          {/* Title (Massive, Right Aligned) */}
-          <div className="col-span-12 md:col-span-10 md:col-start-1 order-2 md:order-2 text-right relative z-20">
-            <Link to={projects[1].link} className="block">
-              <h3 className="text-[18vw] md:text-[14vw] font-black uppercase tracking-tighter leading-[0.8] transition-all duration-300 text-right text-black dark:text-white hover:italic hover:text-transparent hover:[-webkit-text-stroke:1px_black] dark:hover:[-webkit-text-stroke:1px_white]">
-                {projects[1].title}
-              </h3>
-            </Link>
-            <div className="mt-8 max-w-md ml-auto text-left text-black dark:text-white">
-              <p className="text-lg leading-snug">{projects[1].description}</p>
-              <div className="mt-6 flex gap-4">
-                <Link to={projects[1].link} className="flex items-center gap-2 text-xs font-bold uppercase border-b border-current pb-1 hover:text-[#0057FF]">Live <FiArrowUpRight /></Link>
-              </div>
+          return (
+            <div
+              key={project.id}
+              className={`group relative grid grid-cols-1 md:grid-cols-12 gap-x-8 items-start ${index === projects.length - 1 ? 'mb-4 pb-24' : 'mb-24 md:mb-8'}`}
+            >
+              {rightHeavy ? <>{body}{meta}</> : <>{meta}{body}</>}
             </div>
-          </div>
-
-          {/* Meta (Right) */}
-          <div className="col-span-12 md:col-span-2 order-1 md:order-3 md:sticky md:top-32 self-start mb-8 md:mb-0 text-right flex flex-col items-end">
-            <span className="text-sm font-mono block mb-2 text-red-600">02</span>
-            <h4 className="text-xl font-bold uppercase leading-tight whitespace-pre-wrap text-black dark:text-white">{projects[1].category}</h4>
-            <div className="h-px w-8 bg-black dark:bg-white my-4"></div>
-            <ul className="text-xs font-mono text-gray-600 dark:text-gray-400 space-y-1">
-              {projects[1].tech.map(t => <li key={t}>{t}</li>)}
-            </ul>
-          </div>
-        </div>
-
-
-        {/* --- PROJECT 03: SKILLBLOOM (Left Heavy) --- */}
-        <div className="group relative mb-4 grid grid-cols-1 md:grid-cols-12 gap-x-8 items-start pb-24">
-          {/* Meta (Absolute Left) */}
-          <div className="col-span-12 md:col-span-2 md:sticky md:top-32 self-start mb-8 md:mb-0">
-            <span className="text-sm font-mono block mb-2 text-red-600">03</span>
-            <h4 className="text-xl font-bold uppercase leading-tight whitespace-pre-wrap text-black dark:text-white">{projects[2].category}</h4>
-            <div className="h-px w-8 bg-black dark:bg-white my-4"></div>
-            <ul className="text-xs font-mono text-gray-600 dark:text-gray-400 space-y-1">
-              {projects[2].tech.map(t => <li key={t}>{t}</li>)}
-            </ul>
-          </div>
-
-          {/* Title (Massive, Spanning) */}
-          <div className="col-span-12 md:col-span-10 md:col-start-3 relative z-20">
-            <Link to={projects[2].link} className="block">
-              <h3 className="text-[18vw] md:text-[14vw] font-black uppercase tracking-tighter leading-[0.8] transition-all duration-300 text-black dark:text-white hover:italic hover:text-transparent hover:[-webkit-text-stroke:1px_black] dark:hover:[-webkit-text-stroke:1px_white]">
-                {projects[2].title}
-              </h3>
-            </Link>
-            <div className="mt-8 max-w-md text-black dark:text-white">
-              <p className="text-lg leading-snug">{projects[2].description}</p>
-              <div className="mt-6 flex gap-4">
-                <Link to={projects[2].link} className="flex items-center gap-2 text-xs font-bold uppercase border-b border-current pb-1 hover:text-[#00A86B]">Live <FiArrowUpRight /></Link>
-              </div>
-            </div>
-          </div>
-        </div>
-
+          );
+        })}
 
       </div>
     </section>

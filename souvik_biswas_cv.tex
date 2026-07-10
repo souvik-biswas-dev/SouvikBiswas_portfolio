@@ -1,0 +1,158 @@
+%-------------------------------------------------------------------------------
+% Souvik Biswas - Software Engineer CV
+% ATS-friendly, single-page, based on the popular "Jake's Resume" template
+% Compile with: pdflatex souvik_biswas_cv.tex
+%-------------------------------------------------------------------------------
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+% glyphtounicode is pdfTeX-only; XeTeX/LuaTeX emit Unicode-mapped text natively
+\ifdefined\pdfgentounicode
+  \input{glyphtounicode}
+\fi
+
+% ----- Page setup -----
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.55in}
+\addtolength{\evensidemargin}{-0.55in}
+\addtolength{\textwidth}{1.1in}
+\addtolength{\topmargin}{-0.65in}
+\addtolength{\textheight}{1.15in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% ----- Section formatting -----
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure PDF is machine readable / ATS friendly
+\ifdefined\pdfgentounicode
+  \pdfgentounicode=1
+\fi
+
+% ----- Custom commands -----
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------------------------------------------
+\begin{document}
+
+%----------- HEADING -----------
+\begin{center}
+    {\Huge \scshape Souvik Biswas} \\ \vspace{3pt}
+    \small
+    Full-Stack Developer $\cdot$ New Grad 2026 \\ \vspace{2pt}
+    \href{mailto:souvikbiswas.dev@gmail.com}{\underline{souvikbiswas.dev@gmail.com}} $\cdot$
+    \href{https://github.com/souvik-biswas-dev}{\underline{github.com/souvik-biswas-dev}}
+\end{center}
+
+%----------- SUMMARY -----------
+\section{Summary}
+\small{Final-year Computer Science student and full-stack developer experienced in building production-grade web applications with the MERN stack, Next.js, and Go. Shipped a live multi-tenant platform serving 1,000+ users, with hands-on experience in AI integration, Docker, and cloud deployment.}
+\vspace{-4pt}
+
+%----------- SKILLS -----------
+\section{Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages:} C++, C\#, JavaScript, TypeScript, Go \\ \vspace{2pt}
+     \textbf{Web \& App:} MERN Stack, Next.js, React, SvelteKit, React Native (Expo), Tailwind CSS \\ \vspace{2pt}
+     \textbf{Backend \& Databases:} Node.js, Express, Go (Gin), GraphQL, WebSockets, MongoDB, Mongoose, PostgreSQL, Redis, BullMQ \\ \vspace{2pt}
+     \textbf{DevOps \& Cloud:} AWS, Docker, Kubernetes, Docker Compose, Cloudflare Workers, Caddy Proxy \\ \vspace{2pt}
+     \textbf{AI \& Integrations:} Google Gemini API, LangChain, OpenAI API, Meta WhatsApp Cloud API, Razorpay \\ \vspace{2pt}
+     \textbf{Core CS:} Data Structures and Algorithms (200+ problems solved), Low-Level Design, Distributed Systems, DBMS, Computer Networks, Cloud Computing, Cryptography and Network Security
+    }}
+ \end{itemize}
+
+%----------- PROJECTS -----------
+\section{Projects}
+    \resumeSubHeadingListStart
+
+      \resumeProjectHeading
+          {\textbf{School Portal} $\cdot$ \emph{Multi-Tenant School ERP}}{\textit{Next.js, React, MongoDB, Redis, Docker, Gemini API}}
+          \resumeItemListStart
+            \resumeItem{Architected and shipped a multi-tenant web platform solo for a startup, now serving \textbf{1,000+ active students} with strict tenant isolation enforced at the ORM layer via AsyncLocalStorage and a custom Mongoose plugin.}
+            \resumeItem{Built an AI-powered attendance pipeline using \textbf{Google Gemini} OCR that extracts roll-wise data from photographed registers and validates it against the class roster, reducing manual attendance entry by 100\%.}
+            \resumeItem{Engineered a reliable background-job system with \textbf{BullMQ and Redis} for Meta WhatsApp API push notifications and Dockerized cron jobs for idempotent per-student Razorpay billing.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{DriftWatch} $\cdot$ \emph{Drift Detection SaaS}}{\textit{Go (Gin), SvelteKit, Cloudflare Workers, Postgres, Redis, Gemini}}
+          \resumeItemListStart
+            \resumeItem{Built a multi-user SaaS in \textbf{Go (Gin)} with a goroutine-based cron scheduler that diffs live Docker Engine state against the GitHub-declared \texttt{docker-compose.yml}, detecting \textbf{5 drift categories} (env, image, port, missing/extra container) within 60 seconds of any state change.}
+            \resumeItem{Designed a secure agent-push architecture: a lightweight agent pushes container state out over HTTPS with per-project keys — no inbound access to user servers — with per-user GitHub tokens encrypted at rest using \textbf{AES-256-GCM}.}
+            \resumeItem{Eliminated redundant LLM calls by gating Gemini fix-suggestions behind a \textbf{SHA256 state-hash dedupe} in Upstash Redis, and shipped a Cloudflare Worker for GitHub webhook ingestion with HMAC-SHA256 signature verification.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{ReviewFlow} $\cdot$ \emph{Real-Time Code Review}}{\textit{Svelte 5, Go (Gin), GraphQL, WebSocket, MongoDB, Gemini}}
+          \resumeItemListStart
+            \resumeItem{Engineered a race-free WebSocket room hub in \textbf{Go}: an RWMutex-guarded room map mutated only inside a single \texttt{Run()} goroutine fed by register/unregister/broadcast channels, supporting hundreds of concurrent reviewers with bounded send buffers and slow-client eviction.}
+            \resumeItem{Designed a \textbf{gqlgen GraphQL} layer bridged to the hub so every review mutation persists to MongoDB, fans out a typed frame to all connected viewers, and writes a notification row — live, room-scoped pub/sub with no separate message broker.}
+            \resumeItem{Built an asynchronous \textbf{Gemini} code-review pipeline behind a 10 req/min rate limiter with strict JSON output, 30s timeout, retry on quota exhaustion, and idempotent MongoDB upserts, broadcasting results to the room the instant the model returns.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{PrepSenseAI} $\cdot$ \emph{AI Interview Prep Platform}}{\textit{React, Express, Gemini API, MongoDB, Puppeteer, Zod}}
+          \resumeItemListStart
+            \resumeItem{Built a full-stack platform that parses a user's PDF resume against a target job description to generate a personalized interview preparation strategy.}
+            \resumeItem{Integrated the Google Gemini SDK with \textbf{Zod} schema validation to enforce strict JSON outputs, generating technical and behavioral questions with a color-coded skill-gap analysis.}
+            \resumeItem{Developed a server-side HTML-to-PDF rendering pipeline with \textbf{Puppeteer} to auto-generate ATS-optimized resumes from AI feedback, cutting resume turnaround to under 30 seconds.}
+          \resumeItemListEnd
+
+    \resumeSubHeadingListEnd
+
+%----------- EDUCATION -----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Siliguri Institute of Technology}{}
+      {Bachelor of Technology in Computer Science and Engineering \quad $\cdot$ \quad CGPA: 7.5/10}{July 2026}
+  \resumeSubHeadingListEnd
+
+\end{document}
